@@ -1,0 +1,17 @@
+# Keep line endings stable regardless of core.autocrlf:
+# bash/python/web files must stay LF inside WSL, cmd batch files need CRLF.
+*       text=auto
+*.sh    text eol=lf
+*.py    text eol=lf
+*.env   text eol=lf
+*.json  text eol=lf
+*.md    text eol=lf
+*.html  text eol=lf
+*.txt   text eol=lf
+*.bat   text eol=crlf
+*.ps1   text eol=crlf
+*.wav   binary
+*.mp4   binary
+*.webp  binary
+*.png   binary
+*.jpg   binary

@@ -1,0 +1,32 @@
+{
+  "_note": "Step 12 v2 streaming service. ASR/LLM/ref/persona from config/voice.json; TTS quality settings identical to the benchmark (docs/perf_tts_fast.md).",
+  "wsl_distro": "Ubuntu-24.04",
+  "service": {
+    "host": "0.0.0.0",
+    "port": 8020
+  },
+  "tts_fast": {
+    "max_seq_len": 2048,
+    "xvec_only": false,
+    "append_silence": false,
+    "chunk_size": 8
+  },
+  "resample": {
+    "from_hz": 24000,
+    "to_hz": 16000,
+    "library": "soxr ResampleStream (stateful, one resampler per utterance)"
+  },
+  "llm_to_tts": {
+    "_note": "mode 'full' (default): TTS starts when the LLM reply is complete - measured faster on this machine (avatar speaking start mean 3.07 s vs 3.29 s for 'sentence', because TTS and llama.cpp share the GPU while the LLM is still generating) and keeps whole-utterance prosody. 'sentence' remains selectable per request (?mode=sentence).",
+    "mode": "full",
+    "sentence_end_chars": "。！？!?；;…\n",
+    "min_segment_chars": 8,
+    "max_segment_chars": 60,
+    "comma_chars": "，,、"
+  },
+  "livetalking": {
+    "url": "http://localhost:8010",
+    "avatar_id": "wav2lip256_myavatar"
+  },
+  "output_dir": "outputs/step12_v2"
+}

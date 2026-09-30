@@ -1,0 +1,141 @@
+{
+  "_note": "Inventory of the external components on the REFERENCE machine (Windows 11 + RTX 4090 + WSL Ubuntu-24.04). Informational only: scripts read config/paths.env / config/paths.bat, not this file. Nothing listed here is in the repo.",
+  "llama_cpp": {
+    "article_step": 2,
+    "purpose": "LLM server (brain)",
+    "status": "installed, tested standalone",
+    "path": "E:\\llama.cpp",
+    "exe": "E:\\llama.cpp\\llama-server.exe",
+    "version": "b11178 win-cuda-12.4-x64 (+ cudart 12.4)",
+    "source": "https://github.com/ggml-org/llama.cpp/releases/tag/b11178",
+    "port": 8090,
+    "model": {
+      "path": "E:\\llama.cpp\\models\\Qwen3-14B-Q4_K_M.gguf",
+      "source": "https://huggingface.co/Qwen/Qwen3-14B-GGUF",
+      "sha256": "500a8806e85ee9c83f3ae08420295592451379b4f8cf2d0f41c15dffeb6b81f0",
+      "article_name": "Qwen3-14B-Instruct-Q4_K_M.gguf"
+    },
+    "logs": [
+      "E:\\llama.cpp\\server_out.log",
+      "E:\\llama.cpp\\server_err.log"
+    ]
+  },
+  "comfyui": {
+    "article_step": 4,
+    "purpose": "generate idle.mp4 (Wan2.2 image-to-video)",
+    "status": "installed, used once",
+    "path": "E:\\ComfyUI_windows_portable",
+    "version": "v0.37.0 portable nvidia_cu126 (torch 2.13.0+cu126)",
+    "source": "https://github.com/Comfy-Org/ComfyUI/releases/tag/v0.37.0",
+    "port": 8188,
+    "template": "video_wan2_2_14B_i2v (default non-turbo path)",
+    "models_dir": "E:\\ComfyUI_windows_portable\\ComfyUI\\models",
+    "models": {
+      "diffusion_models": [
+        "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors",
+        "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors"
+      ],
+      "text_encoders": [
+        "umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+      ],
+      "vae": [
+        "wan_2.1_vae.safetensors"
+      ],
+      "loras_downloaded_unused": [
+        "wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors",
+        "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors"
+      ]
+    },
+    "models_source": [
+      "https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged",
+      "https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged"
+    ],
+    "input_image": "E:\\ComfyUI_windows_portable\\ComfyUI\\input\\xiaoya_avatar.png",
+    "raw_output": "E:\\ComfyUI_windows_portable\\ComfyUI\\output\\video\\idle_00001_.mp4",
+    "logs": [
+      "E:\\ComfyUI_windows_portable\\comfy_out.log",
+      "E:\\ComfyUI_windows_portable\\comfy_err.log"
+    ],
+    "leftover_installer": "E:\\ComfyUI_portable.7z (1.8 GB, safe to delete manually)"
+  },
+  "livetalking": {
+    "article_step": [
+      10,
+      11
+    ],
+    "purpose": "real-time wav2lip lip sync + WebRTC video",
+    "status": "installed, tested standalone",
+    "wsl_distro": "Ubuntu-24.04",
+    "wsl_distro_warning": "NOT the machine's default distro. Always use: wsl -d Ubuntu-24.04",
+    "paths_reverified": "2026-09-28 (install intact, git clean, venv torch 2.5.0+cu124 CUDA ok)",
+    "path": "/root/livetalking/LiveTalking",
+    "windows_unc": "\\\\wsl$\\Ubuntu-24.04\\root\\livetalking\\LiveTalking",
+    "version": "commit b3e7490a20e7a6330492f8a6ea8200a5d50279d1 (2026-09-13), source unmodified",
+    "source": "https://github.com/lipku/LiveTalking",
+    "venv": "/root/livetalking/LiveTalking/.venv-lt (Python 3.10, torch 2.5.0+cu124)",
+    "port": 8010,
+    "weights": "/root/livetalking/LiveTalking/models/wav2lip.pth (renamed wav2lip256.pth)",
+    "weights_source": "https://drive.google.com/drive/folders/1FOC_MD6wdogyyX_7V1d4NDIO7P9NlSAJ",
+    "weights_original_copy": "/root/lt_weights/wav2lip",
+    "avatars": {
+      "wav2lip256_avatar1": "official sample, data/avatars/wav2lip256_avatar1",
+      "wav2lip256_myavatar": "built from assets/avatar/idle.mp4, data/avatars/wav2lip256_myavatar (81 frames)"
+    },
+    "logs": "/root/lt_logs/lt_test.log"
+  },
+  "wsl_tools": {
+    "uv": "/root/.local/bin/uv (0.12.19)",
+    "apt": [
+      "dos2unix",
+      "ffmpeg",
+      "libgl1",
+      "libglib2.0-0"
+    ]
+  },
+  "voice_pipeline": {
+    "article_step": 9,
+    "purpose": "ASR + LLM client + voice-clone TTS (our rebuild of the author's install-voice.sh)",
+    "status": "installed, tested with test.wav",
+    "wsl_distro": "Ubuntu-24.04",
+    "venv": "/root/cyber_gf/.venv-voice (Python 3.12, torch 2.8.0+cu128)",
+    "packages": {
+      "qwen-tts": "0.1.1 (https://github.com/QwenLM/Qwen3-TTS)",
+      "faster-whisper": "1.2.1 (https://github.com/SYSTRAN/faster-whisper)",
+      "ctranslate2": "4.8.2",
+      "transformers": "4.57.3"
+    },
+    "models": {
+      "asr": "Systran/faster-whisper-large-v3",
+      "tts": "Qwen/Qwen3-TTS-12Hz-1.7B-Base"
+    },
+    "model_cache": "/root/.cache/huggingface/hub",
+    "config": "config/voice.json",
+    "run": "scripts/wsl/run_voice_test.sh",
+    "results": "docs/step9_voice_test.md"
+  },
+  "step12_v2": {
+    "doc": "docs/step12_v2.md",
+    "voice_service": {
+      "script": "scripts/wsl/voice_service.py",
+      "venv": "/root/cyber_gf/.venv-tts-fast",
+      "port": 8020,
+      "config": "config/step12_v2.json"
+    },
+    "livetalking_adapter": {
+      "script": "scripts/wsl/livetalking_cyber_gf.py",
+      "venv": "/root/livetalking/LiveTalking/.venv-lt",
+      "port": 8010,
+      "routes": [
+        "POST /cyber_gf/audio_stream",
+        "GET /cyber_gf/utt/{utt}",
+        "GET /cyber_gf/stats",
+        "GET /cyber_gf/web/..."
+      ],
+      "livetalking_source_modified": false
+    },
+    "demo_page": "web/cyber_gf_demo.html -> http://localhost:8010/cyber_gf/web/cyber_gf_demo.html",
+    "start": "scripts/windows/start_step12_v2.bat",
+    "stop": "scripts/windows/stop_step12_v2.bat"
+  },
+  "conflicting_gpu_services": "On the reference machine two unrelated GPU services (a CosyVoice TTS service on :8001 in the same WSL distro and a Windows service on :8000) must be stopped while the demo runs; the full stack needs ~23.3 GB of 24 GB VRAM."
+}

@@ -1,0 +1,18 @@
+{
+  "_note": "Step 12 MVP: test.wav -> ASR -> llama.cpp -> fast Qwen3-TTS -> complete reply.wav -> LiveTalking /humanaudio. ASR/LLM/ref settings come from config/voice.json.",
+  "wsl_distro": "Ubuntu-24.04",
+  "tts_fast": {
+    "_note": "Same settings as the approved benchmark (docs/perf_tts_fast.md). Non-streaming for the MVP.",
+    "backend": "faster-qwen3-tts",
+    "max_seq_len": 2048,
+    "xvec_only": false,
+    "append_silence": false
+  },
+  "livetalking": {
+    "url": "http://localhost:8010",
+    "avatar_id": "wav2lip256_myavatar",
+    "speaking_poll_s": 0.04,
+    "speaking_start_timeout_s": 15
+  },
+  "output_dir": "outputs/step12"
+}
